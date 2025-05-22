@@ -1,0 +1,16 @@
+Trả lời Yes/No
+1.Thuât toán sử dụng độ lớn phổ để quyết định số bit nhúng?
+1:
+2.Mọi bin tần số đều có thể giấu tối đa 3 bit?
+2:
+3.Pha được điều chỉnh theo giá trị nhị phân tương ứng với dữ liệu giấu?
+3:
+4.Thuật toán giấu dữ liệu ở cả biên độ và pha
+4:
+5.Thuật toán có thể tự động giấu nhiều bit hơn nếu bin có năng lượng cao?
+5:
+6: Các bit dữ liệu được nhúng vào mọi frame của tín hiệu?
+6:
+7: Nếu bit cần giấu là 000, phase sẽ được gán ở gần -π?
+7: 
+

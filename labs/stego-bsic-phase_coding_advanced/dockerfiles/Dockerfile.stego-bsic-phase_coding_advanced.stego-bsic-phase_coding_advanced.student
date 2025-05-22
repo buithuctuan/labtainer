@@ -1,0 +1,44 @@
+ARG registry
+FROM $registry/labtainer.base2
+
+ARG lab
+ARG labdir
+ARG imagedir
+ARG user_name
+ARG password
+ARG apt_source
+ARG version
+LABEL version=$version
+ENV APT_SOURCE $apt_source
+RUN /usr/bin/apt-source.sh
+
+# Cài Python + GUI + audio tools
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    python3 python3-pip gedit x11-apps python3-tk audacity && \
+    pip3 install numpy scipy matplotlib && \
+    apt-get clean
+
+# Thêm hệ thống lab
+ADD $labdir/$imagedir/sys_tar/sys.tar /
+ADD $labdir/sys_$lab.tar.gz /
+
+# Tạo user
+RUN useradd -ms /bin/bash $user_name
+RUN echo "$user_name:$password" | chpasswd
+RUN adduser $user_name sudo
+
+# Switch sang user
+USER $user_name
+ENV HOME /home/$user_name
+
+# Thêm mã nguồn và nội dung home
+ADD $labdir/$imagedir/home_tar/home.tar $HOME
+RUN rm -f $HOME/home.tar
+ADD $labdir/$lab.tar.gz $HOME
+
+# Không biên dịch, không xóa file .py, không tạo run_plot.sh
+
+# Quay lại root để khởi động init
+USER root
+CMD ["/bin/bash", "-c", "exec /sbin/init --log-target=journal 3>&1"]
+
