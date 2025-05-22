@@ -1,5 +1,0 @@
-The lab manual is at 
-   file://LAB_DOCS/stego-bsic-phase_coding_advanced.pdf
-
-You may open these by right clicking
-and select "Open Link".
